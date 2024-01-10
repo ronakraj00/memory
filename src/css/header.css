@@ -1,0 +1,17 @@
+header{
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img{
+    height: 100px;
+    border-radius: 14px;
+    mix-blend-mode:hard-light;
+}
+
+.score{
+    display: flex;
+    gap: 20px;
+}

@@ -1,0 +1,51 @@
+.card{
+    width: max-content;
+    height: max-content;
+    border-radius: 8px;
+    border: 3px solid white;
+    cursor: pointer;
+    box-shadow: 3px 3px 10px rgba(255, 255, 255, 0.447);
+    transition: transform 0.8s;
+    width:150px;
+    height: 190px;
+    overflow: hidden;
+    background: url("../assets/pokemon-background.jpg");
+    background-position: center;
+    background-size: contain;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card:hover{
+    transform: skew(2deg,4deg);
+}
+
+.card.rotate{
+    background:url("../assets/pokemon-background.jpg");
+    background-size: contain;
+    transform: rotate3d(0,1,0,180deg);
+}
+
+.card-name{
+    text-transform: capitalize;
+    text-align: center;
+    color: white;
+    font-size: larger;
+    animation:glow 1s ease-in-out infinite alternate;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 600;
+    background-color: rgba(0, 0, 0, 0.215);
+    width: 100%;
+}
+
+@keyframes glow {
+    0%{
+    filter: drop-shadow(3px 3px 5px rgb(255, 166, 0));
+    }
+    100%{
+    filter: drop-shadow(2px 2px 15px rgb(255, 166, 0));
+    }
+}
