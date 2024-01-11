@@ -112,19 +112,30 @@ export default function Body({ points, setPoints, setMaxPoints, setRound }) {
     return (
         <>
             {game == "ongoing" ? (
-                <div className="card-list">
-                    {pokemonList.length == 0
-                        ? <p className="loading">Loading...</p>
-                        : showList.map((pokemon) => (
-                              <Card
-                                  key={pokemon.name}
-                                  name={displayBack ? "" : pokemon.name}
-                                  img={
-                                      displayBack ? backgroundImg : pokemon.img
-                                  }
-                                  handleCardClick={handleCardClick}
-                              />
-                          ))}
+                <div>
+                    <div className="status">
+                        {alreadySelected.length}
+                        <span>/</span>
+                        {totalNoOfCards}
+                    </div>
+                    <div className="card-list">
+                        {pokemonList.length == 0 ? (
+                            <p className="loading">Loading...</p>
+                        ) : (
+                            showList.map((pokemon) => (
+                                <Card
+                                    key={pokemon.name}
+                                    name={displayBack ? "" : pokemon.name}
+                                    img={
+                                        displayBack
+                                            ? backgroundImg
+                                            : pokemon.img
+                                    }
+                                    handleCardClick={handleCardClick}
+                                />
+                            ))
+                        )}
+                    </div>
                 </div>
             ) : (
                 <GameOver onClick={reset} />
