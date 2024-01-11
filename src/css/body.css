@@ -5,3 +5,11 @@
     gap: 20px;
     padding: 8px;
 }
+
+.loading{
+    font-size:2rem;
+    font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 1px yellow;
+    text-shadow: 3px 3px 20px rgba(0, 0, 0, 0.87);
+}
