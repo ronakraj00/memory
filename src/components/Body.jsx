@@ -39,7 +39,7 @@ export default function Body({ points, setPoints, setMaxPoints, setRound }) {
                 setAlreadySelected([]);
                 setTotalNoOfCards((pre) => pre + 2);
                 setNoOfCardsShown((pre) => (pre < 5 ? pre + 1 : 5));
-                setOffset((pre) => pre + pre);
+                setOffset((pre) => pre + limit);
             } else {
                 //check if cards that are being show are all already selected
                 let suffledArray = [];
