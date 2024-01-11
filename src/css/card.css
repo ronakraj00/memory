@@ -9,7 +9,7 @@
     width:150px;
     height: 190px;
     overflow: hidden;
-    background: url("../assets/pokemon-background.jpg");
+    /* background: url("../assets/pokemon-background.jpg"); */
     background-position: center;
     background-size: contain;
     position: relative;
@@ -34,7 +34,7 @@
     width: 100%;
     position: absolute;
     bottom: 0;
-    filter: drop-shadow(2px 2px 2px rgb(0, 255, 247));
+    filter: drop-shadow(2px 2px 2px yellow);
 }
 
 .card-image-wrapper{
@@ -48,8 +48,10 @@
 
 .card-image-wrapper img{
     transition: transform 0.9s;
+    /* max-width: 150px; */
+    max-height: 190px;
 }
 
-.card-image-wrapper img:hover{
+/* .card-image-wrapper img:hover{
     transform: scale(1.2);
-}
+} */
