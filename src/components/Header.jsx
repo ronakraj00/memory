@@ -4,7 +4,7 @@ export default function Header({ points, round, maxPoints }) {
     return (
         <>
             <header>
-                <div className="logo">Memory Game</div>
+                <div className="logo">Memory <span>Game</span></div>
                 <div className="score">
                     <div className="score-current">
                         <p>Current Points</p>

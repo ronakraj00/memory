@@ -17,6 +17,10 @@ header{
     transform: rotate(-10deg);
 }
 
+.logo span{
+    -webkit-text-stroke: 1px yellow;
+}
+
 .score{
     display: flex;
     gap: 20px;
