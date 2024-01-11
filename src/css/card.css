@@ -40,7 +40,7 @@
 .card-image-wrapper{
     width: 150px;
     height: 190px;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(30px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,6 +52,11 @@
     max-height: 190px;
 }
 
-/* .card-image-wrapper img:hover{
-    transform: scale(1.2);
-} */
+@media screen and (width:500px) {
+    .card{
+        background-color: rgba(0, 0, 0, 0.162);
+    }
+    .card:hover{
+        transform: skew(0deg,0deg);
+    }
+}
