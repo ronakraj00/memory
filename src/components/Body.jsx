@@ -114,7 +114,7 @@ export default function Body({ points, setPoints, setMaxPoints, setRound }) {
             {game == "ongoing" ? (
                 <div className="card-list">
                     {pokemonList.length == 0
-                        ? "nothing to show"
+                        ? <p style={{color:"yellow",fontSize:"2rem"}}>Loading...</p>
                         : showList.map((pokemon) => (
                               <Card
                                   key={pokemon.name}
