@@ -52,7 +52,7 @@
     max-height: 190px;
 }
 
-@media screen and (width:500px) {
+@media screen and (max-width:600px) {
     .card{
         background-color: rgba(0, 0, 0, 0.162);
     }
