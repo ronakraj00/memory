@@ -1,0 +1,22 @@
+.game-over-screen{
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    inset: 0;
+    bottom: 0;
+    height: 100dvh;
+    width: 100vw;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.restart-btn{
+    border: none;
+    padding: 14px;
+    font-size: x-large;
+    border-radius: 8px;
+    box-shadow: 4px 4px 8px white;
+    cursor: pointer;
+}

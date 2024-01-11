@@ -3,36 +3,64 @@ import { useState } from "react";
 import { useEffect } from "react";
 import "../css/body.css";
 import backgroundImg from "../assets/pokemon-background.jpg";
-function shuffle(array) {
-    const newArray = [...array];
-    let currentIndex = newArray.length,
-        randomIndex;
+import { shuffle } from "../utils/helper/shuffle";
+import GameOver from "./GameOver";
 
-    // While there remain elements to shuffle.
-    while (currentIndex > 0) {
-        // Pick a remaining element.
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-
-        // And swap it with the current element.
-        [newArray[currentIndex], newArray[randomIndex]] = [
-            newArray[randomIndex],
-            newArray[currentIndex],
-        ];
-    }
-
-    return newArray;
-}
-
-export default function Body() {
+export default function Body({ points, setPoints, setMaxPoints, setRound }) {
     const [pokemonList, setPokemonList] = useState([]);
-    const [limit, setLimit] = useState(20);
+    const limit = 30;
     const [offset, setOffset] = useState(0);
     const [displayBack, setDisplayBack] = useState(false);
+    const [noOfCardsShown, setNoOfCardsShown] = useState(3);
+    const [totalNoOfCards, setTotalNoOfCards] = useState(5);
+    const [showList, setShowList] = useState([]);
+    const [alreadySelected, setAlreadySelected] = useState([]);
+    const [game, setGame] = useState("ongoing");
+
     console.log("render");
 
-    function handleCardClick() {
-        const suffledArray = shuffle(pokemonList);
+    function reset() {
+        setMaxPoints((pre) => (pre > points ? pre : points));
+        setPoints(0);
+        setGame("ongoing");
+        setOffset(0);
+        setAlreadySelected([]);
+    }
+
+    function handleCardClick(e) {
+        if (alreadySelected.includes(e)) {
+            setGame("over");
+        } else {
+            setPoints((prev) => prev + 1);
+            alreadySelected.push(e);
+            //next round
+            if (alreadySelected.length == totalNoOfCards) {
+                setRound((prev) => prev + 1);
+                setAlreadySelected([]);
+                setTotalNoOfCards((pre) => pre + 2);
+                setNoOfCardsShown((pre) => (pre < 5 ? pre + 1 : 5));
+                setOffset((pre) => pre + pre);
+            } else {
+                //check if cards that are being show are all already selected
+                let suffledArray = [];
+                let okay = [];
+                while (okay.length == 0) {
+                    console.log("reshuffling....");
+                    suffledArray = shuffle(pokemonList);
+                    let toBeShownCards = suffledArray.slice(0, noOfCardsShown);
+                    okay = toBeShownCards.filter(
+                        (card) => !alreadySelected.includes(card.name)
+                    );
+                }
+                setShowList(suffledArray.slice(0, noOfCardsShown));
+
+                console.log(okay);
+                console.log("suffled", suffledArray);
+                console.log("pokemonlist", pokemonList);
+                console.log("selected", alreadySelected);
+                console.log("toshow", showList);
+            }
+        }
         const cards = document.querySelectorAll(".card");
         cards.forEach((card) => {
             card.classList.add("rotate");
@@ -43,14 +71,16 @@ export default function Body() {
                 card.classList.remove("rotate");
             });
             setDisplayBack(false);
-            console.log(cards);
         }, 1500);
-        console.log(pokemonList, suffledArray);
         console.log("clicked");
-        setPokemonList(suffledArray);
     }
 
     useEffect(() => {
+        setShowList(pokemonList.slice(0, noOfCardsShown));
+    }, [pokemonList, noOfCardsShown]);
+
+    useEffect(() => {
+        console.log("useeffect called to fetch");
         const fetchData = async () => {
             try {
                 const response = await fetch(
@@ -58,7 +88,7 @@ export default function Body() {
                 );
                 const data = await response.json();
                 let pokemonUrls = data.results.map((result) => result.url);
-                pokemonUrls = shuffle(pokemonUrls).slice(0, 5);
+                pokemonUrls = shuffle(pokemonUrls).slice(0, totalNoOfCards);
                 const pokemonDetails = await Promise.all(
                     pokemonUrls.map(async (url) => {
                         const res = await fetch(url);
@@ -77,22 +107,28 @@ export default function Body() {
             }
         };
         fetchData();
-    }, [limit, offset]);
+    }, [offset, totalNoOfCards, game]);
 
     return (
         <>
-            <div className="card-list">
-                {pokemonList.length == 0
-                    ? "nothing to show"
-                    : pokemonList.map((pokemon) => (
-                          <Card
-                              key={pokemon.name}
-                              name={displayBack ? "":pokemon.name}
-                              img={displayBack ? backgroundImg : pokemon.img}
-                              handleCardClick={handleCardClick}
-                          />
-                      ))}
-            </div>
+            {game == "ongoing" ? (
+                <div className="card-list">
+                    {pokemonList.length == 0
+                        ? "nothing to show"
+                        : showList.map((pokemon) => (
+                              <Card
+                                  key={pokemon.name}
+                                  name={displayBack ? "" : pokemon.name}
+                                  img={
+                                      displayBack ? backgroundImg : pokemon.img
+                                  }
+                                  handleCardClick={handleCardClick}
+                              />
+                          ))}
+                </div>
+            ) : (
+                <GameOver onClick={reset} />
+            )}
         </>
     );
 }
