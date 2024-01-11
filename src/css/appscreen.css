@@ -1,0 +1,40 @@
+.app-screen {
+    padding: 8px;
+    backdrop-filter: blur(10px);
+    border: 2px solid white;
+    text-align: center;
+}
+
+.welcome {
+    font-weight: 800;
+    font-size: 1.3rem;
+}
+
+.welcome > span {
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(255, 255, 255);
+    text-shadow: 3px 3px 10px rgb(255, 255, 255);
+}
+
+.welcome > span > span {
+    -webkit-text-stroke: 1px yellow;
+}
+
+.instruction {
+    color: transparent;
+    -webkit-text-stroke: 1px orangered;
+    text-shadow: 3px 3px 10px rgb(255, 255, 255);
+}
+
+.start-btn {
+    text-transform: capitalize;
+    border: 2px solid white;
+    padding: 8px 20px;
+    font-size: 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    color: transparent;
+    -webkit-text-stroke: 1px white;
+    text-shadow: 1px 1px 7px white;
+    background: rgba(255, 255, 0, 0.648);
+}
