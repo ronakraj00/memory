@@ -5,6 +5,6 @@ export default function GameOver({onClick}) {
         <div className="game-over-img-wrapper">
             <img src={sad_pikachu} alt="" />
         </div>
-        <button className="restart-btn" onClick={onClick}>Restart</button>
+        <button className="restart-btn scale-animation" onClick={onClick}>Restart</button>
     </div>;
 }

@@ -14,7 +14,7 @@
 }
 
 .welcome {
-    margin-top: 30%;
+    margin-top: 50px;
     font-weight: 800;
     font-size: 1.3rem;
 }
@@ -50,6 +50,19 @@
     cursor: pointer;
 }
 
+.scale-animation{
+    animation: scale 0.9s infinite ease-in-out alternate;
+}
+
+@keyframes scale {
+    from{
+        transform: scale(1);
+    }
+    to{
+        transform: scale(1.1);
+    }
+}
+
 .app-screen-image-wrapper{
     display: flex;
     justify-content: center;
@@ -58,6 +71,7 @@
     max-height: 350px;
     border-radius: 8px;
     overflow: hidden;
+    border: 2px solid white;
 }
 .app-screen-image-wrapper img{
     width: 100%;
